@@ -1,0 +1,41 @@
+多播流程概述
+
+发送者：
+第一步：创建套接字 socket()
+第二步：向多播地址发送数据 sendto()
+
+接收者：
+第一步：创建套接字 socket()
+第二步：设置为加入多播组 setsockopt()
+第三步：将套接字与多播信息结构体绑定 bind()
+第五步：接收数据recvfrom()
+
+头文件：
+      #include <sys/socket.h>
+函数：
+      int setsockopt(int socket, int level, int option_name,
+                     const void *option_value, socklen_t option_len);
+功能：设置一个套接字的选项（属性）
+
+参数：
+     socket：文件描述符
+
+     level：协议层次
+            IPPROTO_IP IP层次
+
+     option_name：选项的名称
+           IP_ADD_MEMBERSHIP  加入多播组
+           IP_DROP_MEMBERSHIP 离开多播组
+
+     option_value：设置的选项的值
+                  struct ip_mreq
+                  {
+                      struct in_addr imr_multiaddr; //组播ip地址
+                      struct in_addr imr_interface; //主机地址
+                      INADDR_ANY 任意主机地址（自动获取你的主机地址）
+                  };
+
+     option_len：option_value的长度
+
+ 返回值：
+      成功：0   失败：‐1
