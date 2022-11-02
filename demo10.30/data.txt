@@ -1,4 +1,0 @@
-hello world
-flight again
-go on
-end
