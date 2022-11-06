@@ -1,0 +1,22 @@
+头文件：
+      #include <sys/types.h>         
+      #include <sys/socket.h>
+函数：
+      int socket(int domain, int type, int protocol);
+功能： 
+      创建套接字，返回文件描述符
+参数：
+      domain：通信域，地址族
+              AF_PACKET(底层接口)
+
+      type：套接字类型
+            SOCK_RAW(原始套接字)
+
+      protocol：附加协议(指定可以接收或发送的数据包类型)
+          头文件：
+          include <netinet/ether.h>
+          ETH_P_ALL  任意协议对应的数据包
+          ETH_P_IP   ipv4数据包
+          ETH_P_ARP  arp数据包
+返回值：
+      成功：文件描述符     失败：‐1
